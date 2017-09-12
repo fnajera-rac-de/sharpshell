@@ -35,7 +35,7 @@ namespace SharpShell
 
             //  Register the type, use the operating system architecture to determine
             //  what registration type to perform.
-            DoRegister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit);
+            DoRegister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SharpShell
 
             //  Unregister the type, use the operating system architecture to determine
             //  what registration type to unregister.
-            DoUnregister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit);
+            DoUnregister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
         }
 
         /// <summary>
@@ -61,7 +61,8 @@ namespace SharpShell
         /// </summary>
         /// <param name="type">The type of object to register, this must be a SharpShellServer derived class.</param>
         /// <param name="registrationType">Type of the registration.</param>
-        internal static void DoRegister(Type type, RegistrationType registrationType)
+        /// <param name="registrationLocation">Location of the registration.</param>
+        internal static void DoRegister(Type type, RegistrationType registrationType, RegistrationLocation registrationLocation)
         {
             //  Get the assoication data.
             var assocationAttributes = type.GetCustomAttributes(typeof(COMServerAssociationAttribute), true)
@@ -74,7 +75,7 @@ namespace SharpShell
             if (assocationAttributes.Any())
             {
                 ServerRegistrationManager.RegisterServerAssociations(
-                    type.GUID, serverType, type.Name, assocationAttributes, registrationType);
+                    type.GUID, serverType, type.Name, assocationAttributes, registrationType, registrationLocation);
             }
 
             //  Execute the custom register function, if there is one.
@@ -88,7 +89,8 @@ namespace SharpShell
         /// </summary>
         /// <param name="type">The type of object to unregister, this must be a SharpShellServer derived class.</param>
         /// <param name="registrationType">Type of the registration to unregister.</param>
-        internal static void DoUnregister(Type type, RegistrationType registrationType)
+        /// <param name="registrationLocation">Location of the registration.</param>
+        internal static void DoUnregister(Type type, RegistrationType registrationType, RegistrationLocation registrationLocation)
         {
             //  Get the assoication data.
             var assocationAttributes = type.GetCustomAttributes(typeof(COMServerAssociationAttribute), true)
@@ -96,18 +98,18 @@ namespace SharpShell
 
             //  Get the server type.
             var serverType = ServerTypeAttribute.GetServerType(type);
-            
+
             //  Unregister the server associations, if there are any.
             if (assocationAttributes.Any())
             {
                 ServerRegistrationManager.UnregisterServerAssociations(
-                    type.GUID, serverType, type.Name, assocationAttributes, registrationType);
+                    type.GUID, serverType, type.Name, assocationAttributes, registrationType, registrationLocation);
             }
 
             //  Execute the custom unregister function, if there is one.
             CustomUnregisterFunctionAttribute.ExecuteIfExists(type, registrationType);
         }
-        
+
         /// <summary>
         /// Logs the specified message to the SharpShell log, with the name of the type.
         /// </summary>
@@ -139,7 +141,7 @@ namespace SharpShell
         /// </value>
         public string DisplayName
         {
-            get 
+            get
             {
                 //  Return the display name if set, otherwise the type name.
                 return DisplayNameAttribute.GetDisplayNameOrTypeName(GetType());

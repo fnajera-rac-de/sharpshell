@@ -422,10 +422,10 @@ namespace ServerManager.TestShell
                     if (shellItem.Attributes.HasFlag(SFGAO.SFGAO_FILESYSTEM))
                     {
                         //  Get our class.
-                        var fileClass = ServerRegistrationManager.GetClassForExtension(Path.GetExtension(shellItem.DisplayName));
+                        var fileClass = ServerRegistrationManager.GetClassForExtension(Path.GetExtension(shellItem.DisplayName), RegistrationLocation.MergedClassesRoot);
 
                         //  Do we match it?
-                        return associations.Any(a => string.Compare(fileClass, ServerRegistrationManager.GetClassForExtension(a), StringComparison.InvariantCultureIgnoreCase) == 0);
+                        return associations.Any(a => string.Compare(fileClass, ServerRegistrationManager.GetClassForExtension(a, RegistrationLocation.MergedClassesRoot), StringComparison.InvariantCultureIgnoreCase) == 0);
                     }
 
                     break;

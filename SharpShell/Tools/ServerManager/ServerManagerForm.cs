@@ -158,7 +158,7 @@ namespace ServerManager
             if (SelectedServerEntry == null)
                 return;
 
-            ServerRegistrationManager.InstallServer(SelectedServerEntry.Server, RegistrationType.OS32Bit, true);
+            ServerRegistrationManager.InstallServer(SelectedServerEntry.Server, RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot, true);
             serverDetailsView1.Initialise(SelectedServerEntry);
         }
         
@@ -168,7 +168,7 @@ namespace ServerManager
                 return;
 
             //  Unregister the server.
-            ServerRegistrationManager.UninstallServer(SelectedServerEntry.Server, RegistrationType.OS32Bit);
+            ServerRegistrationManager.UninstallServer(SelectedServerEntry.Server, RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
         }
 
@@ -263,7 +263,7 @@ namespace ServerManager
             if (selectedServer == null)
                 return;
 
-            ServerRegistrationManager.InstallServer(SelectedServerEntry.Server, RegistrationType.OS64Bit, true);
+            ServerRegistrationManager.InstallServer(SelectedServerEntry.Server, RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot, true);
             serverDetailsView1.Initialise(SelectedServerEntry);
         }
 
@@ -273,7 +273,7 @@ namespace ServerManager
             if (SelectedServerEntry == null)
                 return;
 
-            ServerRegistrationManager.UninstallServer(SelectedServerEntry.Server, RegistrationType.OS64Bit);
+            ServerRegistrationManager.UninstallServer(SelectedServerEntry.Server, RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
         }
 
@@ -297,7 +297,7 @@ namespace ServerManager
                 return;
 
             //  Register the server, x86 mode.
-            ServerRegistrationManager.RegisterServer(SelectedServerEntry.Server, RegistrationType.OS32Bit);
+            ServerRegistrationManager.RegisterServer(SelectedServerEntry.Server, RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
             CheckIfRegisterOrUnregisterRequiresExplorerRestart(SelectedServerEntry.Server);
         }
@@ -309,7 +309,7 @@ namespace ServerManager
                 return;
 
             //  Register the server, x64 mode.
-            ServerRegistrationManager.RegisterServer(SelectedServerEntry.Server, RegistrationType.OS64Bit);
+            ServerRegistrationManager.RegisterServer(SelectedServerEntry.Server, RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
             CheckIfRegisterOrUnregisterRequiresExplorerRestart(SelectedServerEntry.Server);
         }
@@ -321,7 +321,7 @@ namespace ServerManager
                 return;
 
             //  Unregister the server, x86 mode.
-            ServerRegistrationManager.UnregisterServer(SelectedServerEntry.Server, RegistrationType.OS32Bit);
+            ServerRegistrationManager.UnregisterServer(SelectedServerEntry.Server, RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
             CheckIfRegisterOrUnregisterRequiresExplorerRestart(SelectedServerEntry.Server);
         }
@@ -333,7 +333,7 @@ namespace ServerManager
                 return;
 
             //  Unregister the server, x64 mode.
-            ServerRegistrationManager.UnregisterServer(SelectedServerEntry.Server, RegistrationType.OS64Bit);
+            ServerRegistrationManager.UnregisterServer(SelectedServerEntry.Server, RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot);
             serverDetailsView1.Initialise(SelectedServerEntry);
             CheckIfRegisterOrUnregisterRequiresExplorerRestart(SelectedServerEntry.Server);
         }

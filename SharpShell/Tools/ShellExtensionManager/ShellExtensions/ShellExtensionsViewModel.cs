@@ -26,7 +26,7 @@ namespace ShellExtensionManager.ShellExtensions
         private void DoRefreshExtensionsCommand(object parameter)
         {
             //  Get all servers.
-            var servers = ServerRegistrationManager.EnumerateExtensions(RegistrationType.OS64Bit, ShellExtensionType.IconHandler);
+            var servers = ServerRegistrationManager.EnumerateExtensions(RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot, ShellExtensionType.IconHandler);
             foreach (var server in servers)
             {
                 var extensionViewModel = new ExtensionViewModel();

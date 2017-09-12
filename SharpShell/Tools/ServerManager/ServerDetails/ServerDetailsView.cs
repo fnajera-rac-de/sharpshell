@@ -39,9 +39,9 @@ namespace ServerManager.ServerDetails
                     //  Now use the server registration manager to get the registration info
                     //  for the different operating system architectures.
                     var info32 = ServerRegistrationManager.GetServerRegistrationInfo(serverEntry.Server.ServerClsid,
-                                                                                     RegistrationType.OS32Bit);
+                                                                                     RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
                     var info64 = ServerRegistrationManager.GetServerRegistrationInfo(serverEntry.Server.ServerClsid,
-                                                                                     RegistrationType.OS64Bit);
+                                                                                     RegistrationType.OS64Bit, RegistrationLocation.MergedClassesRoot);
 
                     //  By default, our installation info is going to be empty.
                     textBox32BitServer.Text = "Not Installed";

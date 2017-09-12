@@ -110,8 +110,8 @@ namespace ServerRegistrationManager
                 //  Install the server.
                 try
                 {
-                    SharpShell.ServerRegistration.ServerRegistrationManager.InstallServer(serverType, registrationType, codeBase);
-                    SharpShell.ServerRegistration.ServerRegistrationManager.RegisterServer(serverType, registrationType);
+                    SharpShell.ServerRegistration.ServerRegistrationManager.InstallServer(serverType, registrationType, RegistrationLocation.MergedClassesRoot, codeBase);
+                    SharpShell.ServerRegistration.ServerRegistrationManager.RegisterServer(serverType, registrationType, RegistrationLocation.MergedClassesRoot);
                 }
                 catch (Exception e)
                 {
@@ -156,8 +156,8 @@ namespace ServerRegistrationManager
                 try
                 {
 
-                    SharpShell.ServerRegistration.ServerRegistrationManager.UnregisterServer(serverType, registrationType);
-                    SharpShell.ServerRegistration.ServerRegistrationManager.UninstallServer(serverType, registrationType);
+                    SharpShell.ServerRegistration.ServerRegistrationManager.UnregisterServer(serverType, registrationType, RegistrationLocation.MergedClassesRoot);
+                    SharpShell.ServerRegistration.ServerRegistrationManager.UninstallServer(serverType, registrationType, RegistrationLocation.MergedClassesRoot);
                 }
                 catch (Exception e)
                 {
