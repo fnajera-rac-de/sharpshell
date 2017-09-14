@@ -725,27 +725,26 @@ namespace SharpShell.ServerRegistration
         {
             //  Get the classes base key.
             RegistryKey classesBaseKey;
-            switch (registrationLocation)
+            switch (registrationLocation.UserSid)
             {
-                case RegistrationLocation.MergedClassesRoot:
-                    classesBaseKey = registrationType == RegistrationType.OS64Bit
-                        ? RegistryKey.OpenBaseKey(RegistryHive.ClassesRoot, RegistryView.Registry64) :
-                        RegistryKey.OpenBaseKey(RegistryHive.ClassesRoot, RegistryView.Registry32);
-                    break;
-                case RegistrationLocation.CurrentUserClasses:
+                case RegistrationLocation.CurrentUserPseudoSid:
                     classesBaseKey = registrationType == RegistrationType.OS64Bit
                         ? RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64) :
                         RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32);
                     classesBaseKey = classesBaseKey.OpenSubKey(@"SOFTWARE\Classes", true);
                     break;
-                case RegistrationLocation.LocalMachineClasses:
+                case RegistrationLocation.LocalMachinePseudoSid:
                     classesBaseKey = registrationType == RegistrationType.OS64Bit
                         ? RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64) :
                         RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
                     classesBaseKey = classesBaseKey.OpenSubKey(@"SOFTWARE\Classes", true);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(registrationLocation), registrationLocation, null);
+                    classesBaseKey = registrationType == RegistrationType.OS64Bit
+                        ? RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Registry64) :
+                        RegistryKey.OpenBaseKey(RegistryHive.Users, RegistryView.Registry32);
+                    classesBaseKey = classesBaseKey.OpenSubKey(registrationLocation.UserSid + @"_Classes", true);
+                    break;
             }
 
             //  Return the classes key.

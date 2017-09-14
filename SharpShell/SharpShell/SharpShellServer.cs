@@ -35,7 +35,7 @@ namespace SharpShell
 
             //  Register the type, use the operating system architecture to determine
             //  what registration type to perform.
-            DoRegister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
+            DoRegister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.LocalMachine);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SharpShell
 
             //  Unregister the type, use the operating system architecture to determine
             //  what registration type to unregister.
-            DoUnregister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.MergedClassesRoot);
+            DoUnregister(type, Environment.Is64BitOperatingSystem ? RegistrationType.OS64Bit : RegistrationType.OS32Bit, RegistrationLocation.LocalMachine);
         }
 
         /// <summary>
