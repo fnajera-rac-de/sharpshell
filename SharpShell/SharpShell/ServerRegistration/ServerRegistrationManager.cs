@@ -534,7 +534,7 @@ namespace SharpShell.ServerRegistration
 
                         //  If it does, delete it.
                         if (exists)
-                            Registry.ClassesRoot.DeleteSubKeyTree(associationKeyPath);
+                            classesKey.DeleteSubKeyTree(associationKeyPath);
 
                         //  If we're a shell icon handler, we must also unset the defaulticon.
                         if (serverType == ServerType.ShellIconHandler)
