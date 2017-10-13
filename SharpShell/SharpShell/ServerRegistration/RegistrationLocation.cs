@@ -1,4 +1,4 @@
-﻿namespace SharpShell.ServerRegistration
+namespace SharpShell.ServerRegistration
 {
     /// <summary>
     /// Represents the location for the server registration.
